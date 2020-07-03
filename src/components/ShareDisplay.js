@@ -16,9 +16,7 @@ class ShareDisplay extends React.Component {
                     </tr>
 
                     {/* Loop through share results */}
-                    <tr>
-                        <ShareInfo />
-                    </tr>
+                    <ShareInfo />
                 </table>
             </div>
         );
