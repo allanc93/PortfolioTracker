@@ -2,6 +2,7 @@ import React from 'react';
 import ShareInfo from './ShareInfo';
 
 class ShareDisplay extends React.Component {
+
     render() {
         return (
             <div className="share-table">
