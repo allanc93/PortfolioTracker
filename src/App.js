@@ -7,15 +7,14 @@ import ShareDisplay from './components/ShareDisplay';
 function App() {
   return (
     <div className="App">
+      {/* <Search /> */}
       {/* IF Shares view/screen is selected, display this */}
       <div className="share-view">
-        {/* <ShareSearch /> */}
         <ShareDisplay />
       </div>
 
       {/* IF Portfolio view/screen is selected, display this */}
       {/* <div className="portfolio-view">
-        <PortfolioSearch />
         <PortfolioDisplay />
       </div> */}
     </div>
