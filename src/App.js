@@ -9,7 +9,7 @@ class App extends Component {
     constructor() {
         // currentWindow == share || portfolio
         super();
-        this.state = { currentWindow: "share" };
+        this.state = { currentWindow: "portfolio" };
     }
 
     render() {

@@ -1,0 +1,16 @@
+{
+    "portfolio": [
+        {
+            "name":"Apple",
+            "token": "AAPL",
+            "quantity": 1,
+            "bought": 364.11
+        },
+        {
+            "name":"Google",
+            "token": "GOOGL",
+            "quantity": 1,
+            "bought": 1469.93
+        }
+    ]
+}
