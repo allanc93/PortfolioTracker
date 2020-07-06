@@ -1,23 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 import ShareDisplay from './components/ShareDisplay';
+import PortfolioDisplay from './components/PortfolioDisplay';
 
-function App() {
-  return (
-    <div className="App">
-      {/* IF Shares view/screen is selected, display this */}
-      <div className="share-display">
-        <ShareDisplay />
-      </div>
+class App extends Component {
 
-      {/* IF Portfolio view/screen is selected, display this */}
-      {/* <div className="portfolio-display">
-        <PortfolioDisplay />
-      </div> */}
-    </div>
-  );
+    constructor() {
+        // currentWindow == share || portfolio
+        super();
+        this.state = { currentWindow: "share" };
+    }
+
+    render() {
+        const windowType = this.state.currentWindow === "share";
+        return (
+            // There is definitely a better way to do this!!
+            <div className="App">
+                {windowType ? this.shareDisplay() : this.portfolioDisplay()}
+            </div>
+        );
+    }
+
+    shareDisplay() {
+        return (
+            <div className="share-view">
+                <ShareDisplay />
+            </div>
+        );
+    }
+
+    portfolioDisplay() {
+        return (
+            <div className="portfolio-view">
+                <PortfolioDisplay />
+            </div>
+        );
+    }
+
 }
 
 export default App;
