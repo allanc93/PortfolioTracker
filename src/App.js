@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ShareDisplay from './components/ShareDisplay';
 import PortfolioDisplay from './components/PortfolioDisplay';
+import Button from './components/Button';
 
 class App extends Component {
 
   constructor() {
-    // currentWindow == share || portfolio
+    // currentWindow == shares || portfolio
     super();
-    this.state = { currentWindow: "share" };
+    this.state = { currentWindow: "portfolio" };
+
+    this.switchWindow = this.switchWindow.bind(this);
   }
 
   render() {
-    const windowType = this.state.currentWindow === "share";
+    let windowType = this.state.currentWindow === "shares";
     return (
       // There is definitely a better way to do this!!
       <div className="App">
-        {windowType ? this.shareDisplay() : this.portfolioDisplay()}
+        <div className="btn-group-toggle">
+          <Button value={'shares'} buttonText="Shares" handleClick={this.switchWindow} />
+          <Button value={'portfolio'} buttonText="My Portfolio" handleClick={this.switchWindow} />
+        </div>
+        {windowType ? <ShareDisplay /> : <PortfolioDisplay />}
       </div>
     );
   }
 
-  shareDisplay() {
-    return (
-      <ShareDisplay />
-    );
-  }
-
-  portfolioDisplay() {
-    return (
-      <PortfolioDisplay />
-    );
+  switchWindow(e) {
+    this.setState({
+      currentWindow: e.target.value
+    });
   }
 
 }

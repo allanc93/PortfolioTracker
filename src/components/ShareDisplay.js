@@ -34,6 +34,11 @@ class ShareDisplay extends React.Component {
                     {/* Loop through share results */}
                     <ShareInfo shares={this.state.shares} />
                 </table>
+                {/* <div id="loading" className="text-center">
+                    <div class="spinner-border text-secondary " role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div> */}
             </div>
         );
     }
