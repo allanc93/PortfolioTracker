@@ -8,8 +8,8 @@ class PortfolioDisplay extends Component {
     constructor() {
         super();
         this.state = {
-            portfolioData: []
-
+            portfolioData: [],
+            shareNumber :0
         };
     }
 
@@ -19,8 +19,8 @@ class PortfolioDisplay extends Component {
 
     render() {
         return (
-            <div className="share-table">
-                <table id="portfolio-table" className="table table-striped m-5 w-75">
+            <div className="share-table bg">
+                <table id="portfolio-table" className="table table-striped mx-auto my-5 w-75">
                     <thead className="thead-dark">
                         <tr>
                             <th>Company Name</th>
@@ -34,8 +34,14 @@ class PortfolioDisplay extends Component {
                     </thead>
                     <tbody>
                         <tr id="portfolioTable"></tr>
+
                     </tbody>
                 </table>
+                <div id="loading" className="text-center">
+                    <div class="spinner-border text-secondary " role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -45,7 +51,7 @@ class PortfolioDisplay extends Component {
         let element = this.state.portfolioData;
         let portfolioTable = document.getElementById("portfolio-table");
         let row = portfolioTable.insertRow(1);
-
+        var rows = portfolioTable.getElementsByTagName("tr")
         row.insertCell(0).innerHTML = element.name;
         row.insertCell(1).innerHTML = element.symbol;
         row.insertCell(2).innerHTML = element.shares;
@@ -54,7 +60,9 @@ class PortfolioDisplay extends Component {
         row.insertCell(5).innerHTML = `$${element.total}`;
         row.insertCell(6).innerHTML = `$${element.profit}`;
 
-
+        if(rows.length-2 === this.state.shareNumber){
+            document.getElementById('loading').style.display = 'none';
+        }
     }
 
 
@@ -63,6 +71,10 @@ class PortfolioDisplay extends Component {
         const JsonFile = "portfolio.json";
         const resp = await axios.get(JsonFile);
         this.getDataFromAPI(resp.data);
+
+        this.setState({
+            shareNumber : resp.data.portfolio.length
+        });
     }
 
     getDataFromAPI(data) {
