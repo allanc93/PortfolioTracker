@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShareInfo from './ShareInfo';
 import axios from 'axios';
+import '../bootstrap.min.css';
 
 class PortfolioDisplay extends Component {
 
@@ -19,17 +20,21 @@ class PortfolioDisplay extends Component {
     render() {
         return (
             <div className="share-table">
-                <table id="portfolio-table">
-                    <tr>
-                        <th>Company Name</th>
-                        <th>Symbol</th>
-                        <th>Shares held</th>
-                        <th>Bought price</th>
-                        <th>Current price</th>
-                        <th>Total value</th>
-                        <th>Net profit</th>
-                    </tr>
-                    <tr id="portfolioTable"></tr>
+                <table id="portfolio-table" className="table table-striped m-5 w-75">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Symbol</th>
+                            <th>Shares held</th>
+                            <th>Bought price</th>
+                            <th>Current price</th>
+                            <th>Total value</th>
+                            <th>Net profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="portfolioTable"></tr>
+                    </tbody>
                 </table>
             </div>
         );
@@ -44,10 +49,10 @@ class PortfolioDisplay extends Component {
         row.insertCell(0).innerHTML = element.name;
         row.insertCell(1).innerHTML = element.symbol;
         row.insertCell(2).innerHTML = element.shares;
-        row.insertCell(3).innerHTML = element.bought;
-        row.insertCell(4).innerHTML = element.current;
-        row.insertCell(5).innerHTML = element.total;
-        row.insertCell(6).innerHTML = element.profit;
+        row.insertCell(3).innerHTML = `$${element.bought}`;
+        row.insertCell(4).innerHTML = `$${element.current}`;
+        row.insertCell(5).innerHTML = `$${element.total}`;
+        row.insertCell(6).innerHTML = `$${element.profit}`;
 
 
     }
