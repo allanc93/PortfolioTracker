@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import ShareInfo from './ShareInfo';
 
 class ShareDisplay extends React.Component {
@@ -17,10 +19,10 @@ class ShareDisplay extends React.Component {
 
     render() {
         return (
-            <div className="share-view">
+            <div className="share-display">
                 <h1 className="my-4" >Shares Available</h1>
                 <hr className="my-4" />
-                <table className="table table-bordered table-hover">
+                <table className="table table-bordered table-hover mx-auto my-5">
                     <thead className="thead-dark">
                         <tr>
                             <th>Symbol</th>

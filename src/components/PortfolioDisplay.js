@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ShareInfo from './ShareInfo';
 import axios from 'axios';
-import '../bootstrap.min.css';
+
+import ShareInfo from './ShareInfo';
 
 class PortfolioDisplay extends Component {
 
@@ -19,8 +19,10 @@ class PortfolioDisplay extends Component {
 
     render() {
         return (
-            <div className="share-table bg">
-                <table id="portfolio-table" className="table table-striped mx-auto my-5 w-75">
+            <div className="portfolio-display">
+                <h1 className="my-4" >My Portfolio</h1>
+                <hr className="my-4" />
+                <table id="portfolio-table" className="table table-bordered table-hover mx-auto my-5">
                     <thead className="thead-dark">
                         <tr>
                             <th>Company Name</th>
@@ -88,7 +90,7 @@ class PortfolioDisplay extends Component {
                     symbol: element.token,
                     shares: element.quantity,
                     bought: element.bought,
-                    current: responseData[0][1]['05. price'],
+                    current: responseData[0][1]['05. price'].toFixed(2),
                     total: element.quantity * responseData[0][1]['05. price'],
                     profit: element.quantity * responseData[0][1]['05. price'] - (element.quantity * element.bought)
                 }
