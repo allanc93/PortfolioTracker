@@ -6,37 +6,33 @@ import PortfolioDisplay from './components/PortfolioDisplay';
 
 class App extends Component {
 
-    constructor() {
-        // currentWindow == share || portfolio
-        super();
-        this.state = { currentWindow: "share" };
-    }
+  constructor() {
+    // currentWindow == share || portfolio
+    super();
+    this.state = { currentWindow: "share" };
+  }
 
-    render() {
-        const windowType = this.state.currentWindow === "share";
-        return (
-            // There is definitely a better way to do this!!
-            <div className="App">
-                {windowType ? this.shareDisplay() : this.portfolioDisplay()}
-            </div>
-        );
-    }
+  render() {
+    const windowType = this.state.currentWindow === "share";
+    return (
+      // There is definitely a better way to do this!!
+      <div className="App">
+        {windowType ? this.shareDisplay() : this.portfolioDisplay()}
+      </div>
+    );
+  }
 
-    shareDisplay() {
-        return (
-            <div className="share-view">
-                <ShareDisplay />
-            </div>
-        );
-    }
+  shareDisplay() {
+    return (
+      <ShareDisplay />
+    );
+  }
 
-    portfolioDisplay() {
-        return (
-            <div className="portfolio-view">
-                <PortfolioDisplay />
-            </div>
-        );
-    }
+  portfolioDisplay() {
+    return (
+      <PortfolioDisplay />
+    );
+  }
 
 }
 

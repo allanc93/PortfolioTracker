@@ -18,20 +18,17 @@ import React from 'react';
 // }
 
 const ShareInfo = ({ shares }) => {
-    shares = Object.entries(shares)
-    console.log(typeof shares)
-    console.log(shares[0])
+    shares = Object.values(shares)
 
     return (
         <tbody>
-
             {shares.map((share) => (
                 <tr>
-                    <td>{share[1]["1. symbol"]}</td>
-                    <td>{share[1]["2. name"]}</td>
-                    <td>{share[1]["3. type"]}</td>
-                    <td>{share[1]["4. region"]}</td>
-                    <td>{share[1]["8. currency"]}</td>
+                    <td>{share["1. symbol"]}</td>
+                    <td>{share["2. name"]}</td>
+                    <td>{share["3. type"]}</td>
+                    <td>{share["4. region"]}</td>
+                    <td>{share["8. currency"]}</td>
                 </tr>
 
             ))
