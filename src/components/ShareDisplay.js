@@ -5,14 +5,15 @@ import ShareInfo from './ShareInfo';
 
 class ShareDisplay extends React.Component {
     state = {
-        shares: []
+        sharesData: [],
+        numOfResults: 0
     }
 
     componentDidMount() {
         fetch('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact')
             .then(response => response.json())
             .then((data) => {
-                this.setState({ shares: data.bestMatches })
+                this.setState({ sharesData: data.bestMatches, numOfResults: data.bestMatches.length })
             })
             .catch(console.log)
     }
@@ -33,8 +34,8 @@ class ShareDisplay extends React.Component {
                             <th></th>
                         </tr>
                     </thead>
-                    {/* Loop through share results */}
-                    <ShareInfo shares={this.state.shares} />
+                    {/* Return share results */}
+                    <ShareInfo shares={this.state.sharesData} />
                 </table>
                 {/* <div id="loading" className="text-center">
                     <div class="spinner-border text-secondary " role="status">

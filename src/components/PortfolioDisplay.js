@@ -27,11 +27,11 @@ class PortfolioDisplay extends Component {
                         <tr>
                             <th>Company Name</th>
                             <th>Symbol</th>
-                            <th>Shares held</th>
-                            <th>Bought price</th>
-                            <th>Current price</th>
-                            <th>Total value</th>
-                            <th>Net profit</th>
+                            <th>Shares Held</th>
+                            <th>Bought Price</th>
+                            <th>Current Price</th>
+                            <th>Total Value</th>
+                            <th>Net Profit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,9 +57,9 @@ class PortfolioDisplay extends Component {
         row.insertCell(1).innerHTML = element.symbol;
         row.insertCell(2).innerHTML = element.shares;
         row.insertCell(3).innerHTML = `$${element.bought}`;
-        row.insertCell(4).innerHTML = `$${element.current}`;
-        row.insertCell(5).innerHTML = `$${element.total}`;
-        row.insertCell(6).innerHTML = `$${element.profit}`;
+        row.insertCell(4).innerHTML = `$${Number(element.current).toFixed(2)}`;
+        row.insertCell(5).innerHTML = `$${(element.total).toFixed(2)}`;
+        row.insertCell(6).innerHTML = `$${(element.profit).toFixed(2)}`;
 
         if (rows.length - 2 === this.state.shareNumber) {
             document.getElementById('loading').style.display = 'none';
@@ -90,9 +90,9 @@ class PortfolioDisplay extends Component {
                     symbol: element.token,
                     shares: element.quantity,
                     bought: element.bought,
-                    current: responseData[0][1]['05. price'].toFixed(2),
-                    total: element.quantity * responseData[0][1]['05. price'],
-                    profit: element.quantity * responseData[0][1]['05. price'] - (element.quantity * element.bought)
+                    current: responseData[0][1]['05. price'],
+                    total: element.quantity * element.bought,
+                    profit: (element.quantity * responseData[0][1]['05. price']) - (element.quantity * element.bought)
                 }
             });
             this.convertPortfolioDataToTableView();

@@ -21,7 +21,7 @@ class App extends Component {
     return (
       // There is definitely a better way to do this!!
       <div className="App">
-        <div className="btn-group-toggle">
+        <div className="btn-group btn-group-toggle my-4">
           <Button value={'shares'} buttonText="Shares" handleClick={this.switchWindow} />
           <Button value={'portfolio'} buttonText="My Portfolio" handleClick={this.switchWindow} />
         </div>
