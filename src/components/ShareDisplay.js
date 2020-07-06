@@ -18,6 +18,8 @@ class ShareDisplay extends React.Component {
     render() {
         return (
             <div className="share-view">
+                <h1 className="my-4" >Shares Available</h1>
+                <hr className="my-4" />
                 <table className="table table-bordered table-hover">
                     <thead className="thead-dark">
                         <tr>
@@ -26,6 +28,7 @@ class ShareDisplay extends React.Component {
                             <th>Type</th>
                             <th>Region</th>
                             <th>Currency</th>
+                            <th></th>
                         </tr>
                     </thead>
                     {/* Loop through share results */}
