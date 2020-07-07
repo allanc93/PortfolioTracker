@@ -18,7 +18,7 @@ const ShareInfo = ({ shares }) => {
                             <input type="number" className="form-control mt-0 mb-2 mr-0" id="amount" placeholder="Amount to buy..." />
 
                             <button className="btn btn-success mt-0 mb-2">
-                                Buy
+                                Buy HEllo
                             </button>
                         </form>
                     </td>
