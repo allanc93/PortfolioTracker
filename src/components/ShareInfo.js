@@ -13,14 +13,9 @@ const ShareInfo = ({ shares }) => {
                     <td>{share["4. region"]}</td>
                     <td>{share["8. currency"]}</td>
                     <td>
-                        <form className="form-inline">
-                            <label className="sr-only" for="amount">Amount</label>
-                            <input type="number" className="form-control mt-0 mb-2 mr-0" id="amount" placeholder="Amount to buy..." />
-
-                            <button className="btn btn-success mt-0 mb-2">
-                                Buy HEllo
-                            </button>
-                        </form>
+                        <button className="btn btn-primary mt-0 mb-2">
+                            View Share
+                        </button>
                     </td>
                 </tr>
 
