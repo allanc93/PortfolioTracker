@@ -14,7 +14,7 @@ const ShareInfo = ({ shares }) => {
                     <td>{share["8. currency"]}</td>
                     <td>
                         <button className="btn btn-primary mt-0 mb-2">
-                            View ShareXYZ
+                            View Share
                         </button>
                     </td>
                 </tr>
