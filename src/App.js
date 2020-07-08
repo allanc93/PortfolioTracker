@@ -8,35 +8,6 @@ import Button from './components/Button';
 
 class App extends Component {
 
-<<<<<<< HEAD
-    constructor() {
-        // currentWindow == shares || portfolio
-        super();
-        this.state = { currentWindow: "portfolio" };
-
-        this.switchWindow = this.switchWindow.bind(this);
-    }
-
-    render() {
-        let windowType = this.state.currentWindow === "shares";
-        return (
-            // There is definitely a better way to do this!!
-            <div className="App">
-                <div className="btn-group-toggle">
-                <Button value={'shares'} buttonText="Shares" handleClick={this.switchWindow}/>
-                <Button value={'portfolio'} buttonText="My Portfolio" handleClick={this.switchWindow}/>
-                </div>
-                {windowType ? <ShareDisplay /> : <PortfolioDisplay />}
-            </div>
-        );
-    }
-
-    switchWindow(e){
-        this.setState({
-            currentWindow : e.target.value
-        });
-    }
-=======
   constructor() {
     // currentWindow == shares || portfolio
     super();
@@ -64,7 +35,6 @@ class App extends Component {
       currentWindow: e.target.value
     });
   }
->>>>>>> 17b25be301f5958ea926e1e09d7c5f7da281526b
 
 }
 

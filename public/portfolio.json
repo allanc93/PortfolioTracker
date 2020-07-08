@@ -1,18 +1,4 @@
 {
-<<<<<<< HEAD
-    "portfolio": [
-        {
-            "name":"Apple",
-            "token": "AAPL",
-            "quantity": 2,
-            "bought": 364.11
-        },
-        {
-            "name":"Google",
-            "token": "GOOGL",
-            "quantity": 1,
-            "bought": 1469.93
-=======
     "portfolio": [{
             "name": "Apple",
             "token": "AAPL",
@@ -24,7 +10,6 @@
             "token": "GOOGL",
             "quantity": 4,
             "bought": 1459.93
->>>>>>> 17b25be301f5958ea926e1e09d7c5f7da281526b
         }
     ]
 }
