@@ -74,7 +74,9 @@ class ShareDisplay extends React.Component {
         if (this.state.shareNumber === 7) {
             // Included setInterval to ensure icon is displayed for 3s after loading is complete
             setInterval(() => {
-                document.getElementById('loading').style.display = 'none';
+                if(document.getElementById('loading')){
+                    document.getElementById('loading').style.display = 'none';
+                }
             }, 3000);
         }
     }
