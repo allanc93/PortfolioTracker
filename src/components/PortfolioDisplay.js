@@ -46,13 +46,13 @@ class PortfolioDisplay extends Component {
 
     getDataFromAPI(data) {
         // Use portfolio data to aquire more info about the stocks and shares
-        /*data.portfolio.forEach(async (element) => {
+        data.portfolio.forEach(async (element) => {
             const APIlink = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${element.token}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`
             const resp = await axios.get(APIlink);
             let responseData = Object.entries(resp.data);
             // complile data from the portfolio json and the API call into one object
             this.setState({
-                portfolioData: {
+                portfolioData: this.state.portfolioData.concat({
                     name: element.name,
                     symbol: element.token,
                     shares: element.quantity,
@@ -60,32 +60,9 @@ class PortfolioDisplay extends Component {
                     current: Number(responseData[0][1]['05. price']),
                     total: element.quantity * element.bought,
                     profit: (element.quantity * Number(responseData[0][1]['05. price'])) - (element.quantity * element.bought)
-                }
+                })
             });
-            
-            this.convertPortfolioDataToTableView();
-        });*/
-
-
-        this.setState({
-            portfolioData: [{
-                name: "Apple Inc",
-                symbol: "AAPL",
-                shares: 5,
-                bought: 350,
-                current: 400,
-                total: 1750,
-                profit: 99999
-            },{
-                name: "Google",
-                symbol: "GOOGL",
-                shares: 2,
-                bought: 500,
-                current: 550,
-                total: 1100,
-                profit: 100
-            }]
-
+            console.log(this.state.portfolioData);
         });
     }
 }
