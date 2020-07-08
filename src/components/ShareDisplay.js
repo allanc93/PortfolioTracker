@@ -30,24 +30,27 @@ class ShareDisplay extends React.Component {
         const APIlink = `testSharesData.json`;
         // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
         const resp = await axios.get(APIlink);
-        let responseData = Object.values(resp.data);
+        let responseData = Object.entries(resp.data);
+        console.log("BEFORE LOOP");
         console.log(responseData);
-        responseData.forEach((result) => {
+        responseData[0][1].forEach((result) => {
             this.setState({
-                sharesData: {
-                    name: responseData[0][0]['2. name'],
-                    symbol: responseData[0][0]['1. symbol'],
-                    type: responseData[0][0]['3. type'],
-                    region: responseData[0][0]['4. region'],
-                    currency: responseData[0][0]['8. currency'],
-                    timezone: responseData[0][0]['7. timezone'],
-                    open: responseData[0][0]['5. marketOpen'],
-                    close: responseData[0][0]['6. marketClose'],
-                }
+                sharesData: this.state.sharesData.concat({
+                    name: result['2. name'],
+                    symbol: result['1. symbol'],
+                    type: result['3. type'],
+                    region: result['4. region'],
+                    currency: result['8. currency'],
+                    timezone: result['7. timezone'],
+                    open: result['5. marketOpen'],
+                    close: result['6. marketClose'],
+                })
             });
+            console.log("IN LOOP");
             console.log(result);
             console.log(this.state.sharesData);
         })
+        console.log("AFTER LOOP");
         console.log(this.state.sharesData);
     }
 
