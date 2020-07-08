@@ -11,13 +11,14 @@ class App extends Component {
   constructor() {
     // currentWindow == shares || portfolio
     super();
-    this.state = { currentWindow: "portfolio" };
-
+    this.state = {
+      currentWindow: "shares"
+    };
     this.switchWindow = this.switchWindow.bind(this);
   }
 
   render() {
-    let windowType = this.state.currentWindow === "shares";
+    let windowType = this.state.currentWindow === "portfolio";
     return (
       // There is definitely a better way to do this!!
       <div className="App">
@@ -25,7 +26,7 @@ class App extends Component {
           <Button value={'shares'} buttonText="Shares" handleClick={this.switchWindow} />
           <Button value={'portfolio'} buttonText="My Portfolio" handleClick={this.switchWindow} />
         </div>
-        {windowType ? <ShareDisplay /> : <PortfolioDisplay />}
+        {windowType ? <PortfolioDisplay /> : <ShareDisplay />}
       </div>
     );
   }
