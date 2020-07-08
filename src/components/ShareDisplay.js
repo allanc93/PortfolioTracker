@@ -1,24 +1,47 @@
 import React from 'react';
+import axios from 'axios';
+
 import ShareInfo from './ShareInfo';
 
 class ShareDisplay extends React.Component {
+    state = {
+        sharesData: [],
+        numOfResults: 0
+    }
+
+    componentDidMount() {
+        fetch('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact')
+            .then(response => response.json())
+            .then((data) => {
+                this.setState({ sharesData: data.bestMatches, numOfResults: data.bestMatches.length })
+            })
+            .catch(console.log)
+    }
 
     render() {
         return (
-            <div className="share-table">
-                <table>
-                    <tr>
-                        <th>Company Name</th>
-                        <th>Symbol</th>
-                        <th>High</th>
-                        <th>Low</th>
-                        <th>Price</th>
-                        <th>XYZ</th>
-                    </tr>
-
-                    {/* Loop through share results */}
-                    <ShareInfo />
+            <div className="share-display">
+                <h1 className="my-4" >Shares Available</h1>
+                <hr className="my-4" />
+                <table className="table table-bordered table-hover mx-auto my-5">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company Name</th>
+                            <th>Type</th>
+                            <th>Region</th>
+                            <th>Currency</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    {/* Return share results */}
+                    <ShareInfo shares={this.state.sharesData} />
                 </table>
+                {/* <div id="loading" className="text-center">
+                    <div class="spinner-border text-secondary " role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div> */}
             </div>
         );
     }
