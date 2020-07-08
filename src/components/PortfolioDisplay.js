@@ -57,7 +57,7 @@ class PortfolioDisplay extends Component {
         row.insertCell(1).innerHTML = element.symbol;
         row.insertCell(2).innerHTML = element.shares;
         row.insertCell(3).innerHTML = `$${element.bought}`;
-        row.insertCell(4).innerHTML = `$${element.current.toFixed(2)}`;
+        row.insertCell(4).innerHTML = `$${(element.current).toFixed(2)}`;
         row.insertCell(5).innerHTML = `$${(element.total).toFixed(2)}`;
         row.insertCell(6).innerHTML = `$${(element.profit).toFixed(2)}`;
 
