@@ -4,18 +4,46 @@ import axios from 'axios';
 import ShareInfo from './ShareInfo';
 
 class ShareDisplay extends React.Component {
-    state = {
-        sharesData: [],
-        numOfResults: 0
+    // state = {
+    //     sharesData: [],
+    //     numOfResults: 0
+    // }
+    constructor() {
+        super();
+        this.state = {
+            sharesData: [],
+            shareNumber: 0
+        };
     }
 
     componentDidMount() {
-        fetch('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact')
-            .then(response => response.json())
-            .then((data) => {
-                this.setState({ sharesData: data.bestMatches, numOfResults: data.bestMatches.length })
-            })
-            .catch(console.log)
+        // fetch('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact')
+        //     .then(response => response.json())
+        //     .then((data) => {
+        //         this.setState({ sharesData: data.bestMatches, numOfResults: data.bestMatches.length })
+        //     })
+        //     .catch(console.log)
+        this.getDataFromAPI();
+    }
+
+    async getDataFromAPI() {
+        const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`
+        const resp = await axios.get(APIlink);
+        let responseData = Object.entries(resp.data);
+        console.log(responseData);
+        this.setState({
+            sharesData: {
+                name: responseData[1][0]['2. name'],
+                symbol: responseData[1][0]['1. symbol'],
+                type: responseData[1][0]['3. type'],
+                region: responseData[1][0]['4. region'],
+                currency: responseData[1][0]['8. currency'],
+                timezone: responseData[1][0]['7. timezone'],
+                open: responseData[1][0]['5. marketOpen'],
+                close: responseData[1][0]['6. marketClose'],
+            }
+        });
+        console.log(this.state.sharesData);
     }
 
     render() {
@@ -35,7 +63,7 @@ class ShareDisplay extends React.Component {
                         </tr>
                     </thead>
                     {/* Return share results */}
-                    <ShareInfo shares={this.state.sharesData} />
+                    {/* <ShareInfo shares={this.state.sharesData} /> */}
                 </table>
                 {/* <div id="loading" className="text-center">
                     <div class="spinner-border text-secondary " role="status">
