@@ -27,8 +27,8 @@ class ShareDisplay extends React.Component {
     }
 
     async getDataFromAPI() {
-        // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
         const APIlink = `testSharesData.json`;
+        // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
         const resp = await axios.get(APIlink);
         let responseData = Object.values(resp.data);
         console.log(responseData);
