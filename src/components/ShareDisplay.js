@@ -27,22 +27,27 @@ class ShareDisplay extends React.Component {
     }
 
     async getDataFromAPI() {
-        const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`
+        // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=AAPL&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
+        const APIlink = `testSharesData.json`;
         const resp = await axios.get(APIlink);
-        let responseData = Object.entries(resp.data);
+        let responseData = Object.values(resp.data);
         console.log(responseData);
-        this.setState({
-            sharesData: {
-                name: responseData[1][0]['2. name'],
-                symbol: responseData[1][0]['1. symbol'],
-                type: responseData[1][0]['3. type'],
-                region: responseData[1][0]['4. region'],
-                currency: responseData[1][0]['8. currency'],
-                timezone: responseData[1][0]['7. timezone'],
-                open: responseData[1][0]['5. marketOpen'],
-                close: responseData[1][0]['6. marketClose'],
-            }
-        });
+        responseData.forEach((result) => {
+            this.setState({
+                sharesData: {
+                    name: responseData[0][0]['2. name'],
+                    symbol: responseData[0][0]['1. symbol'],
+                    type: responseData[0][0]['3. type'],
+                    region: responseData[0][0]['4. region'],
+                    currency: responseData[0][0]['8. currency'],
+                    timezone: responseData[0][0]['7. timezone'],
+                    open: responseData[0][0]['5. marketOpen'],
+                    close: responseData[0][0]['6. marketClose'],
+                }
+            });
+            console.log(result);
+            console.log(this.state.sharesData);
+        })
         console.log(this.state.sharesData);
     }
 
