@@ -1,7 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
-import ShareInfo from './ShareInfo';
 import Input from './Input';
 import TableComponent from './TableComponent';
 import APICall from './APICall';
@@ -21,9 +20,9 @@ class ShareDisplay extends React.Component {
     handleSearchData(data) {
         this.setState({
             sharesData: [],
-            searchData: `${data}`
+            searchData: data
         });
-        if (this.state.searchData !== '' || this.state.searchData === null) {
+        if (data !== '' || data === null) {
             this.getDataFromAPI(data);
         }
     }
@@ -35,11 +34,7 @@ class ShareDisplay extends React.Component {
     }
 
     async getDataFromAPI(keyword) {
-        console.log(keyword);
         // Retrieve API data
-        // const APIlink = `testSharesData.json`;
-        // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
-        // const resp = await axios.get(APIlink);
         const resp = await APICall('SYMBOL_SEARCH', keyword);
         let responseData = Object.entries(resp.data);
 
@@ -86,9 +81,9 @@ class ShareDisplay extends React.Component {
 
 
 
-                {/* {(this.state.searchData === '') || (this.state.sharesData.length === 0)
+                {(this.state.searchData === '') || (this.state.sharesData.length === 0)
                     ? <p>Enter a company name (eg, Apple) or it's symbol (eg, AAPL) to find results...</p>
-                    : <TableComponent tableData={this.state.sharesData} />} */}
+                    : <TableComponent tableData={this.state.sharesData} />}
 
 
 
@@ -100,7 +95,7 @@ class ShareDisplay extends React.Component {
 
 
 
-                <TableComponent tableData={this.state.sharesData} />
+                {/* <TableComponent tableData={this.state.sharesData} /> */}
                 {/* <div id="loading" className="text-center">
                     <div className="spinner-border text-secondary " role="status">
                         <span className="sr-only">Loading...</span>
