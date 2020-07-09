@@ -49,7 +49,6 @@ class PortfolioDisplay extends Component {
         // Use portfolio data to aquire more info about the stocks and shares
         data.portfolio.forEach(async (element) => {
             const resp = await APICall('GLOBAL_QUOTE', element.token);
-            console.log(resp);
             let responseData = Object.entries(resp.data);
             // complile data from the portfolio json and the API call into one object
             this.setState({

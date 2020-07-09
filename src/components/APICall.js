@@ -12,19 +12,17 @@ async function APICall(APIfunction, APIsearch) {
     APIfunction === "SYMBOL_SEARCH" ? param = 'keywords' : param = 'symbol';
     const APIlink = `https://www.alphavantage.co/query?function=${APIfunction}&${param}=${APIsearch}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
     if (classData.usedCalls.includes(APIlink)) {
-        console.log('grabbing old data');
         let x = findValue(classData.callMap, APIlink);
         console.log(x);
         return x;
     } else {
-        console.log('grabbing new data');
         let resp = await axios.get(APIlink);
         classData = {
             usedCalls: classData.usedCalls.concat(APIlink),
             callMap: classData.callMap.concat([{ APIlink, resp }])
         };
 
-        setTimeout(removeOldData.bind(null,APIlink), 5000);
+        setTimeout(removeOldData.bind(null,APIlink), 60000);
 
 
         return resp;
@@ -63,7 +61,6 @@ function removeOldData(APIlink){
                 }
             }
 
-            console.log(classData);
 }
 
 export default APICall;
