@@ -30,7 +30,6 @@ class Input extends Component {
                 <label>Search by company name or symbol: </label>
                 <input type="text" value={this.state.inputField} onChange={this.handleChange} />
                 <button type="submit">Submit</button>
-                <p>Received by CHILD: {this.state.inputField}</p>
             </form>
         )
     }
