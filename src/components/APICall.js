@@ -11,6 +11,7 @@ async function APICall(APIfunction, APIsearch) {
     let param = '';
     APIfunction === "SYMBOL_SEARCH" ? param = 'keywords' : param = 'symbol';
     const APIlink = `https://www.alphavantage.co/query?function=${APIfunction}&${param}=${APIsearch}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
+
     if (classData.usedCalls.includes(APIlink)) {
         let x = findValue(classData.callMap, APIlink);
         console.log(x);
