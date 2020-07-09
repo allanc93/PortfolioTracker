@@ -27,11 +27,11 @@ class ShareDisplay extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     if (this.state.searchData !== '') {
-    //         this.getDataFromAPI();
-    //     }
-    // }
+    componentDidMount() {
+        if (this.state.searchData !== '') {
+            this.getDataFromAPI();
+        }
+    }
 
     async getDataFromAPI(keyword) {
         console.log(keyword);
