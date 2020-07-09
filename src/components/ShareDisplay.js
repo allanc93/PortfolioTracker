@@ -78,7 +78,7 @@ class ShareDisplay extends React.Component {
                 <h1 className="my-4" >Shares Available</h1>
                 <Input />
                 <hr className="my-4" />
-                <TableComponent tableData={this.state.portfolioData} />
+                <TableComponent tableData={this.state.sharesData} />
                 <div id="loading" className="text-center">
                     <div className="spinner-border text-secondary " role="status">
                         <span className="sr-only">Loading...</span>
