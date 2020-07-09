@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import ShareInfo from './ShareInfo';
 import Input from './Input';
+import TableComponent from './TableComponent';
 
 class ShareDisplay extends React.Component {
     constructor() {
@@ -14,10 +15,14 @@ class ShareDisplay extends React.Component {
         };
     }
 
-    async getDataFromAPI(q) {
+    componentDidMount() {
+        this.getDataFromAPI();
+    }
+
+    async getDataFromAPI() {
         // Retrieve API data
-        // const APIlink = `testSharesData.json`;
-        const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
+        const APIlink = `testSharesData.json`;
+        // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${q}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
         const resp = await axios.get(APIlink);
         let responseData = Object.entries(resp.data);
 
@@ -60,7 +65,7 @@ class ShareDisplay extends React.Component {
         if (this.state.shareNumber === 7) {
             // Included setInterval to ensure icon is displayed for 3s after loading is complete
             setInterval(() => {
-                if(document.getElementById('loading')){
+                if (document.getElementById('loading')) {
                     document.getElementById('loading').style.display = 'none';
                 }
             }, 3000);
