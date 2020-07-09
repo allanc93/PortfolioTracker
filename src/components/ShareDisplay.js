@@ -79,11 +79,11 @@ class ShareDisplay extends React.Component {
                 <Input />
                 <hr className="my-4" />
                 <TableComponent tableData={this.state.sharesData} />
-                <div id="loading" className="text-center">
+                {/* <div id="loading" className="text-center">
                     <div className="spinner-border text-secondary " role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }
