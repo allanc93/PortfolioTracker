@@ -45,7 +45,7 @@ class ShareDisplay extends React.Component {
                     close: result['6. marketClose'],
                 }),
                 // Add 1 to shareNumber state
-                shareNumber: this.state.shareNumber + 1
+                // shareNumber: this.state.shareNumber + 1
             });
             // Logs displayed during loop
             console.log("IN LOOP");
@@ -53,7 +53,7 @@ class ShareDisplay extends React.Component {
             console.log(this.state.sharesData);
 
             // Call checkShareNumber, to check if loading icon should still be displayed
-            this.checkShareNumber();
+            // this.checkShareNumber();
         })
         // Logs displayed after loop has completed
         console.log("AFTER LOOP");
@@ -61,16 +61,16 @@ class ShareDisplay extends React.Component {
     }
 
     // Check the value of the shareNumber state to determine if all results have been returned
-    checkShareNumber() {
-        if (this.state.shareNumber === 7) {
-            // Included setInterval to ensure icon is displayed for 3s after loading is complete
-            setInterval(() => {
-                if (document.getElementById('loading')) {
-                    document.getElementById('loading').style.display = 'none';
-                }
-            }, 3000);
-        }
-    }
+    // checkShareNumber() {
+    //     if (this.state.shareNumber === 7) {
+    //         // Included setInterval to ensure icon is displayed for 3s after loading is complete
+    //         setInterval(() => {
+    //             if (document.getElementById('loading')) {
+    //                 document.getElementById('loading').style.display = 'none';
+    //             }
+    //         }, 3000);
+    //     }
+    // }
 
     render() {
         return (
