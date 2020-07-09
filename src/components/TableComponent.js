@@ -1,4 +1,4 @@
-import React, { Component, createElement } from 'react';
+import React, { Component } from 'react';
 
 class TableComponent extends Component {
 
@@ -49,7 +49,7 @@ class TableComponent extends Component {
             return <td key={key}>{key}</td>
         });
 
-        return (<tr> {row} </tr>);
+        return (<tr>{row}</tr>);
     }
 
 
