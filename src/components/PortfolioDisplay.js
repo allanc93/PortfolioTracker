@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../bootstrap.min.css';
 import TableComponent from './TableComponent';
+import APICall from './APICall';
 
 class PortfolioDisplay extends Component {
 
@@ -47,8 +48,8 @@ class PortfolioDisplay extends Component {
     getDataFromAPI(data) {
         // Use portfolio data to aquire more info about the stocks and shares
         data.portfolio.forEach(async (element) => {
-            const APIlink = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${element.token}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`
-            const resp = await axios.get(APIlink);
+            const resp = await APICall('GLOBAL_QUOTE', element.token);
+            console.log(resp);
             let responseData = Object.entries(resp.data);
             // complile data from the portfolio json and the API call into one object
             this.setState({
@@ -62,7 +63,6 @@ class PortfolioDisplay extends Component {
                     profit: (element.quantity * Number(responseData[0][1]['05. price'])) - (element.quantity * element.bought)
                 })
             });
-            console.log(this.state.portfolioData);
         });
     }
 }
