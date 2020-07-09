@@ -9,7 +9,7 @@ class PortfolioDisplay extends Component {
         super();
         this.state = {
             portfolioData: [],
-            shareNumber :0
+            shareNumber: 0
         };
     }
 
@@ -22,7 +22,7 @@ class PortfolioDisplay extends Component {
             <div className="portfolio-display">
                 <h1 className="my-4" >My Portfolio</h1>
                 <hr className="my-4" />
-                <TableComponent tableData={this.state.portfolioData}/>
+                <TableComponent tableData={this.state.portfolioData} />
                 {/* <div id="loading" className="text-center">
                     <div class="spinner-border text-secondary " role="status">
                         <span class="sr-only">Loading...</span>
