@@ -57,9 +57,9 @@ class PortfolioDisplay extends Component {
                     symbol: element.token,
                     shares: element.quantity,
                     bought: element.bought,
-                    current: Number(responseData[0][1]['05. price']),
-                    total: element.quantity * element.bought,
-                    profit: (element.quantity * Number(responseData[0][1]['05. price'])) - (element.quantity * element.bought)
+                    current: Number(responseData[0][1]['05. price']).toFixed(2),
+                    total: (element.quantity * element.bought).toFixed(2),
+                    profit: ((element.quantity * Number(responseData[0][1]['05. price'])) - (element.quantity * element.bought)).toFixed(2)
                 })
             });
         });
