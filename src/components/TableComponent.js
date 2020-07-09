@@ -48,7 +48,6 @@ class TableComponent extends Component {
         let row = value.map((key) => {
             return <td key={key}>{key}</td>
         });
-
         return (<tr>{row}</tr>);
     }
 
