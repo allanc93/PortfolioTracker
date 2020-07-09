@@ -4,6 +4,7 @@ import axios from 'axios';
 import ShareInfo from './ShareInfo';
 import Input from './Input';
 import TableComponent from './TableComponent';
+import APICall from './APICall';
 
 class ShareDisplay extends React.Component {
     constructor(props) {
@@ -37,8 +38,9 @@ class ShareDisplay extends React.Component {
         console.log(keyword);
         // Retrieve API data
         // const APIlink = `testSharesData.json`;
-        const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
-        const resp = await axios.get(APIlink);
+        // const APIlink = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
+        // const resp = await axios.get(APIlink);
+        const resp = await APICall('SYMBOL_SEARCH', keyword);
         let responseData = Object.entries(resp.data);
 
         // Loop through the data in the API response array
