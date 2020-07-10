@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import './bootstrap.min.css';
+
 
 import ShareDisplay from './components/ShareDisplay';
 import PortfolioDisplay from './components/PortfolioDisplay';

@@ -4,6 +4,7 @@ import React from 'react';
 import Input from './Input';
 import TableComponent from './TableComponent';
 import APICall from './APICall';
+//import Button from './Button';
 
 class ShareDisplay extends React.Component {
     constructor(props) {
@@ -51,6 +52,7 @@ class ShareDisplay extends React.Component {
                     timezone: result['7. timezone'],
                     open: result['5. marketOpen'],
                     close: result['6. marketClose'],
+                    //buy: <Button handleClick={() => {alert(result['1. symbol'])}} buttonText='Buy'/>,
                 }),
                 // Add 1 to shareNumber state
                 // shareNumber: this.state.shareNumber + 1
