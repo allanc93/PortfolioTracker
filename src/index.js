@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './bootstrap.min.css';
+import './bootstrap.min.js';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
