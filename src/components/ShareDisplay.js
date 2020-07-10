@@ -4,17 +4,22 @@ import React from 'react';
 import Input from './Input';
 import TableComponent from './TableComponent';
 import APICall from './APICall';
-//import Button from './Button';
+import Button from './Button';
+import Modal from './Modal';
 
 class ShareDisplay extends React.Component {
     constructor(props) {
         super(props);
         this.handleSearchData = this.handleSearchData.bind(this);
+        this.createModal = this.updateModal.bind(this);
         // Declare ShareDisplay component states
         this.state = {
             sharesData: [],
             shareNumber: 0,
-            searchData: ''
+            searchData: '',
+            modalTitle: '',
+            modalToken: ''
+
         };
     }
 
@@ -34,6 +39,14 @@ class ShareDisplay extends React.Component {
         }
     }
 
+    updateModal(title, token) {
+        this.setState({
+            modalTitle : title,
+            modalToken : token
+        });
+    }
+
+
     async getDataFromAPI(keyword) {
         // Retrieve API data
         const resp = await APICall('SYMBOL_SEARCH', keyword);
@@ -52,7 +65,7 @@ class ShareDisplay extends React.Component {
                     timezone: result['7. timezone'],
                     open: result['5. marketOpen'],
                     close: result['6. marketClose'],
-                    //buy: <Button handleClick={() => {alert(result['1. symbol'])}} buttonText='Buy'/>,
+                    buy: <Button handleClick={this.updateModal(result['2. name'], result['1. symbol'])} buttonText='Buy' modal="true" token={result['1. symbol']}/>,
                 }),
                 // Add 1 to shareNumber state
                 // shareNumber: this.state.shareNumber + 1
@@ -87,7 +100,12 @@ class ShareDisplay extends React.Component {
                     ? <p>Enter a company name (eg, Apple) or it's symbol (eg, AAPL) to find results...</p>
                     : <TableComponent tableData={this.state.sharesData} />}
 
+                
+ 
+                    <Modal title={this.state.modalTitle} id={this.state.modalToken}/>
 
+                
+                
 
                 {/* {((this.state.searchData === '') && (this.state.sharesData.length === 0))
                     ? <p>Enter a company name (eg, Apple) or it's symbol (eg, AAPL) to find results...</p>
