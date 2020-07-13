@@ -22,6 +22,7 @@ class Modal extends Component {
                     </div>
                 </div>
             </div>
+            //<button className="btn btn-lg btn-dark" type="button" value={this.props.value} onClick={this.props.handleClick} data-toggle="modal" data-target={this.props.token}>{this.props.buttonText} </button>
         );
     }
 }

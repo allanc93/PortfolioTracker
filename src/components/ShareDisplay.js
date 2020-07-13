@@ -6,6 +6,7 @@ import TableComponent from './TableComponent';
 import APICall from './APICall';
 import Button from './Button';
 import Modal from './Modal';
+//import '../modalJQ';
 
 class ShareDisplay extends React.Component {
     constructor(props) {
@@ -40,9 +41,10 @@ class ShareDisplay extends React.Component {
     }
 
     updateModal(title, token) {
+        console.log('updating modal to ' + title + ', ' + token);
         this.setState({
-            modalTitle : title,
-            modalToken : token
+            modalTitle: title,
+            modalToken: token
         });
     }
 
@@ -65,7 +67,7 @@ class ShareDisplay extends React.Component {
                     timezone: result['7. timezone'],
                     open: result['5. marketOpen'],
                     close: result['6. marketClose'],
-                    buy: <Button handleClick={this.updateModal(result['2. name'], result['1. symbol'])} buttonText='Buy' modal="true" token={result['1. symbol']}/>,
+                    buy: <Button handleClick={() => { this.updateModal(result['2. name'], result['1. symbol']) }} buttonText='Buy' modal="true" token={`#${result['1. symbol']}`} />,
                 }),
                 // Add 1 to shareNumber state
                 // shareNumber: this.state.shareNumber + 1
@@ -100,12 +102,12 @@ class ShareDisplay extends React.Component {
                     ? <p>Enter a company name (eg, Apple) or it's symbol (eg, AAPL) to find results...</p>
                     : <TableComponent tableData={this.state.sharesData} />}
 
-                
- 
-                    <Modal title={this.state.modalTitle} id={this.state.modalToken}/>
 
-                
-                
+
+                <Modal title={this.state.modalTitle} id={this.state.modalToken} />
+
+
+
 
                 {/* {((this.state.searchData === '') && (this.state.sharesData.length === 0))
                     ? <p>Enter a company name (eg, Apple) or it's symbol (eg, AAPL) to find results...</p>
