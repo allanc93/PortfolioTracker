@@ -1,0 +1,15 @@
+{
+    "portfolio": [{
+            "name": "Microsoft",
+            "token": "MSFT",
+            "quantity": 15,
+            "bought": 213.67
+        },
+        {
+            "name": "Facebook",
+            "token": "FB",
+            "quantity": 2,
+            "bought": 245.07
+        }
+    ]
+}

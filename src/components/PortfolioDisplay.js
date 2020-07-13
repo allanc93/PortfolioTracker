@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../bootstrap.min.css';
 import TableComponent from './TableComponent';
 import APICall from './APICall';
+import DropdownComponent from './DropdownComponent';
 
 class PortfolioDisplay extends Component {
 
@@ -12,17 +13,39 @@ class PortfolioDisplay extends Component {
             portfolioData: [],
             shareNumber: 0
         };
+        this.handleDropDownChange = this.handleDropDownChange.bind(this);
+
+    }
+    
+    getPorfolios(){
+        const menuData = [];
+        // TO-DO Use package to get actual files
+
+        menuData.push('portfolio1');
+        menuData.push('portfolio2');
+        menuData.push('portfolio3');
+        return menuData;
     }
 
     componentDidMount() {
+        this.getPorfolios();
         this.getDataFromJson();
     }
+
+    handleDropDownChange(){
+        this.setState({
+            portfolioData : []
+        });
+        this.getDataFromJson();
+    }
+    
 
     render() {
         return (
             <div className="portfolio-display">
                 <h1 className="my-4" >My Portfolio</h1>
                 <hr className="my-4" />
+                <DropdownComponent handleChange={this.handleDropDownChange} id="portfolio-selector" menuData={this.getPorfolios()}/>
                 <TableComponent tableData={this.state.portfolioData} />
                 {/* <div id="loading" className="text-center">
                     <div class="spinner-border text-secondary " role="status">
@@ -36,7 +59,8 @@ class PortfolioDisplay extends Component {
 
     async getDataFromJson() {
         // Get basic data from the JSON file about the details of portfolio
-        const JsonFile = "portfolio.json";
+        let currentPortfolio = document.getElementById('portfolio-selector').value;
+        const JsonFile = `/portfolios/${currentPortfolio}.json`;
         const resp = await axios.get(JsonFile);
         this.getDataFromAPI(resp.data);
 

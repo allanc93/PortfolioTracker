@@ -1,0 +1,15 @@
+{
+    "portfolio": [{
+            "name": "Amazon",
+            "token": "AMZN",
+            "quantity": 1,
+            "bought": 3200.00
+        },
+        {
+            "name": "Google",
+            "token": "GOOGL",
+            "quantity": 4,
+            "bought": 1459.93
+        }
+    ]
+}

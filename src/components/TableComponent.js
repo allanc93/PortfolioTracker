@@ -29,8 +29,8 @@ class TableComponent extends Component {
     getHeader() {
         let keys = this.getKeys();
         if (keys) {
-            return keys.map((key) => {
-                return <th key={key}>{this.capitalizeFirstLetter(key)}</th>
+            return keys.map((head, index) => {
+                return <th key={index}>{this.capitalizeFirstLetter(head)}</th>
             });
         }
     }
@@ -45,10 +45,14 @@ class TableComponent extends Component {
     }
 
     getRow(value) {
-        let row = value.map((key) => {
-            return <td key={key}>{key}</td>
+        let tempKey;
+        let row = value.map((head, index) => {
+            if(!tempKey){
+                tempKey = head;
+            }
+            return <td key={index}>{head}</td>
         });
-        return (<tr>{row}</tr>);
+        return (<tr key={tempKey}>{row}</tr>);
     }
 
 
