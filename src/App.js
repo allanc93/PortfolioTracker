@@ -3,7 +3,7 @@ import './App.css';
 
 import ShareDisplay from './components/ShareDisplay';
 import PortfolioDisplay from './components/PortfolioDisplay';
-import Button from './components/Button';
+import ButtonComponent from './components/ButtonComponent';
 
 class App extends Component {
 
@@ -22,8 +22,8 @@ class App extends Component {
       // There is definitely a better way to do this!!
       <div className="App">
         <div className="btn-group btn-group-toggle my-4">
-          <Button value={'shares'} buttonText="Shares" handleClick={this.switchWindow} />
-          <Button value={'portfolio'} buttonText="My Portfolio" handleClick={this.switchWindow} />
+          <ButtonComponent value={'shares'} buttonText="Shares" handleClick={this.switchWindow} />
+          <ButtonComponent value={'portfolio'} buttonText="My Portfolio" handleClick={this.switchWindow} />
         </div>
         {windowType ? <PortfolioDisplay /> : <ShareDisplay />}
       </div>
