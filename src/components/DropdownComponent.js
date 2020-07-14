@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 class DropdownComponent extends Component {
 
-    getDropDownData(){
-        return this.props.menuData.map((element)=>{
-            return (<option key={element}>{element}</option>);
-        });
+    getDropDownData() {
+        if (this.props.menuData) {
+            return this.props.menuData.map((element) => {
+                return (<option key={element}>{element}</option>);
+            });
+        } else {
+            return null;
+        }
     }
 
     render() {
