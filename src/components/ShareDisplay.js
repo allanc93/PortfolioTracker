@@ -13,9 +13,11 @@ class ShareDisplay extends React.Component {
         this.createModal = this.updateModal.bind(this);
         // Declare ShareDisplay component states
         this.state = {
+            // search field and resulting API call
             sharesData: [],
-            resultData: [],
             searchData: '',
+            // API call to populate modal and storage of modal-related data
+            resultData: [],
             modalTitle: '',
             modalToken: '',
             modalCurrency: '',
@@ -23,6 +25,7 @@ class ShareDisplay extends React.Component {
         };
     }
 
+    // Call back function which manages data sent back from the SearchInput component
     handleSearchData = (data) => {
         this.setState({
             sharesData: [],
@@ -33,12 +36,14 @@ class ShareDisplay extends React.Component {
         }
     }
 
+    // Checks if a search has been made before making an API call
     componentDidMount() {
         if (this.state.searchData !== '') {
             this.getDataFromAPI();
         }
     }
 
+    // Updates the data that will be passed to the modal
     async updateModal(title, token, currency) {
         console.log(`Updating modal to ${title}/${token} (currency: ${currency}).`);
         this.setState({
@@ -53,7 +58,7 @@ class ShareDisplay extends React.Component {
         let responseData = Object.entries(resp.data);
 
         this.setState({
-            // Define the name/value pairs to add to the responseData state
+            // Define the name/value pairs to add to the resultData state
             resultData: ({
                 symbol: responseData[0][1]['01. symbol'],
                 open: Number(responseData[0][1]['02. open']).toFixed(2),
@@ -74,7 +79,7 @@ class ShareDisplay extends React.Component {
         const resp = await APICall('SYMBOL_SEARCH', keyword);
         let responseData = Object.entries(resp.data);
 
-        // Loop through the data in the API response array
+        // Loop through the data in the API response array and update the sharesData state
         responseData[0][1].forEach((result) => {
             this.setState({
                 // Define the name/value pairs to add to the sharesData state
@@ -97,14 +102,25 @@ class ShareDisplay extends React.Component {
         return (
             <div className="share-display">
                 <h1 className="my-4" >Shares Available</h1>
+                {/* SearchInput component, callback function passed as props */}
                 <SearchInput inputData={this.handleSearchData} />
                 <hr className="my-4" />
 
+                {/* Checks if a search has been made, displays a message or TableComponent component */}
                 {(this.state.searchData === '') || (this.state.sharesData.length === 0)
                     ? <p>Enter a company name (eg, Apple) or it's symbol (eg, AAPL) to find results...</p>
                     : <TableComponent tableData={this.state.sharesData} />}
 
-                <ViewModal title={this.state.modalTitle} id={this.state.modalToken} currency={this.state.modalCurrency} show={this.state.modalShow} onHide={() => this.setState({ modalShow: false })} modalData={this.state.resultData} />
+                {/* ViewModal component takes a number of props in order to pass the required data to the modal */}
+                {/* Data from the resulting API call is also passed in modalData prop */}
+                <ViewModal
+                    title={this.state.modalTitle}
+                    id={this.state.modalToken}
+                    currency={this.state.modalCurrency}
+                    show={this.state.modalShow}
+                    onHide={() => this.setState({ modalShow: false })}
+                    modalData={this.state.resultData}
+                />
             </div>
         );
     }
