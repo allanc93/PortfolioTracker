@@ -92,7 +92,7 @@ class ShareDisplay extends React.Component {
                     timezone: result['7. timezone'],
                     open: result['5. marketOpen'],
                     close: result['6. marketClose'],
-                    Details: <ButtonComponent handleClick={() => { this.updateModal(result['2. name'], result['1. symbol'], result['8. currency']) }} buttonText='View' btnType="modalOpen" token={`#${result['1. symbol']}`} />,
+                    details: <ButtonComponent handleClick={() => { this.updateModal(result['2. name'], result['1. symbol'], result['8. currency']) }} buttonText='View' btnType="modalOpen" token={`#${result['1. symbol']}`} />,
                 }),
             });
         })
