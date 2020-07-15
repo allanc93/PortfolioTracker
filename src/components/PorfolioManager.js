@@ -32,6 +32,33 @@ class PortfolioManager {
         return listOfFiles;
     }
 
+    async removePortfolio(title) {
+        let listOfFiles = await this.getPortfolioList();
+        if (listOfFiles) {
+            console.log('lets see if you are an array...');
+            console.log(listOfFiles);
+            if (listOfFiles.includes(title)) {
+                let num = -1;
+                for (let index = 0; index < listOfFiles.length; index++) {
+                    const element = listOfFiles[index];
+                    if (element === title) {
+                        num = index;
+                    }
+                }
+                if (num === -1) {
+                    alert('The portfolio you are trying to remove does not exist!!!!');
+                    return;
+                }
+                console.log(`removing /portfolios/${num}/${title}`);
+                return firebase.database().ref(`/portfolios/${num}/${title}`).remove();
+            } else {
+                alert('The portfolio you are trying to remove does not exist!');
+            }
+        } else {
+            alert('List of files is empty!');
+        }
+    }
+
     async getPortfolioData(title) {
         if (!title) {
             alert('No title passed to getPortfolioData!');
@@ -53,17 +80,16 @@ class PortfolioManager {
     // Creates a new blank portfolio
     async addPortfolio(title) {
         let listOfFiles = await this.getPortfolioList();
-        console.log(listOfFiles);
         if (listOfFiles.includes(title)) {
             alert("Can't add " + title + ' since it already exists!');
             return;
         }
 
         let data = {
-            "name": "Facebook",
-            "token": "FB",
-            "quantity": 5,
-            "bought": 245.07
+            "name": "",
+            "token": "",
+            "quantity": 0,
+            "bought": 0
         };
 
         let updates = {};
@@ -72,42 +98,29 @@ class PortfolioManager {
 
     }
 
-    // Removes a portfolio
-    removePortfolio(title) {
-
-    }
 
     // Edit existing portfolio
     async editPortfolio(title, data) {
-        if (!this.containsToken(title, data.token)) {
-            var updates = {};
-            let num = 0;
-            let listOfFiles = await this.getPortfolioList();
-            for (let index = 0; index < listOfFiles.length; index++) {
-                if (listOfFiles[index] === title) {
-
-                    updates[index] = data;
-                    num = index;
-                }
-            }
-            return firebase.database().ref(`/portfolios/${num}/${title}`).update(updates);
-        } else {
-            let originalQuantity = await this.getQuantity(title, data.token);
-
-            data.quantity = originalQuantity + data.quantity;
-
-            var updates = {};
-            let num = 0;
-            let listOfFiles = await this.getPortfolioList();
-            for (let index = 0; index < listOfFiles.length; index++) {
-                if (listOfFiles[index] === title) {
-
-                    updates[index] = data;
-                    num = index;
-                }
-            }
-            return firebase.database().ref(`/portfolios/${num}/${title}`).update(updates);
+        if (!(await this.getPortfolioList()).includes(title)) {
+            alert('The portfolio you are trying to edit does not exist!');
+            return;
         }
+        if (this.containsToken(title, data.token)) {
+            let originalQuantity = await this.getQuantity(title, data.token);
+            data.quantity = originalQuantity + data.quantity;
+        }
+        var updates = {};
+        let num = 0;
+        let listOfFiles = await this.getPortfolioList();
+        for (let index = 0; index < listOfFiles.length; index++) {
+            if (listOfFiles[index] === title) {
+
+                updates[index] = data;
+                num = index;
+            }
+        }
+        return firebase.database().ref(`/portfolios/${num}/${title}`).update(updates);
+
 
     }
 
@@ -133,6 +146,8 @@ class PortfolioManager {
         });
         return bool;
     }
+
+
 }
 
 export default PortfolioManager;

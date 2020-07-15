@@ -46,19 +46,25 @@ class PortfolioDisplay extends Component {
                 <h1 className="my-4" >My Portfolio</h1>
                 <hr className="my-4" />
                 <DropdownComponent handleChange={this.handleDropDownChange} id="portfolio-selector" menuData={this.state.portfolios} />
+                <Button buttonText="Delete" handleClick={()=>{
+                    let pf = document.getElementById('portfolio-selector').value;
+                    if(window.confirm('Are you sure you wish to delete ' + pf + ', this cannot be undone!')){
+                        this.PortfolioManager.removePortfolio(pf);
+                    }
+                }}/>
                 <TableComponent tableData={this.state.portfolioData} />
                 <Button buttonText="test" handleClick={() => {
                     let dummydata = {
                         "name": "Facebook",
                         "token": "FB",
-                        "quantity": 5,
+                        "quantity": -5,
                         "bought": 245.07
                     };
-                    //this.PortfolioManager.editPortfolio('portfolio2', dummydata);
+                    this.PortfolioManager.editPortfolio('portfolio2', dummydata);
                     //this.PortfolioManager.getPortfolioData('portfolio1');
                     //this.PortfolioManager.getQuantity('portfolio2', 'FB');
                     //this.PortfolioManager.addPortfolio('portfolio1');
-                    this.PortfolioManager.addPortfolio('pls work v2');
+                    //this.PortfolioManager.addPortfolio('pls work v2');
 
                 }} />
                 {/* <div id="loading" className="text-center">
@@ -76,22 +82,17 @@ class PortfolioDisplay extends Component {
     async getDataFromJson() {
         // Get basic data from the JSON file about the details of portfolio
         let currentPortfolio = document.getElementById('portfolio-selector').value;
-        const JsonFile = `/portfolios/portfolios.json`;
-        const resp = await axios.get(JsonFile);
+        const resp = await this.PortfolioManager.getPortfolioData(currentPortfolio);
 
-        //console.log(resp);
+        console.log(resp);
         //console.log(resp.data);
         //console.log(resp.data.portfolios);
-        let testlist = [];
-        resp.data.portfolios.forEach(element => {
-            if (element[currentPortfolio]) {
-                testlist = (element[currentPortfolio]);
-            }
-        });
-        this.getDataFromAPI(testlist);
+        var rows = Object.values(resp);
+        console.log(rows);
+        this.getDataFromAPI(rows);
 
         this.setState({
-            shareNumber: testlist.length
+            shareNumber: rows.length
         });
     }
 
