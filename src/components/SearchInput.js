@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Input extends Component {
+class SearchInput extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -44,4 +44,4 @@ class Input extends Component {
     }
 }
 
-export default Input
+export default SearchInput

@@ -100,7 +100,14 @@ class PortfolioManager {
 
 
     // Edit existing portfolio
-    async editPortfolio(title, data) {
+    async editPortfolio(title, name, token, quantity, price) {
+        let data ={
+            "name":name,
+            "token":token,
+            "quantity":quantity,
+            "bought":price
+
+        }
         if (!(await this.getPortfolioList()).includes(title)) {
             alert('The portfolio you are trying to edit does not exist!');
             return;
@@ -146,6 +153,7 @@ class PortfolioManager {
         });
         return bool;
     }
+
 
 
 }

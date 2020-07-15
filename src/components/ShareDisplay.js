@@ -1,11 +1,11 @@
 import React from 'react';
 // import axios from 'axios';
 
-import Input from './Input';
+import Input from './SearchInput';
 import TableComponent from './TableComponent';
 import APICall from './APICall';
-import Button from './Button';
-import Modal from './Modal';
+import Button from './ButtonComponent';
+import Modal from './ViewModal';
 //import '../modalJQ';
 
 class ShareDisplay extends React.Component {

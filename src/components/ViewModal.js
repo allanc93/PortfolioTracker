@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Modal extends Component {
+class ViewModal extends Component {
     render() {
         return (
             <div class="modal fade" id={this.props.id} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -27,4 +27,4 @@ class Modal extends Component {
     }
 }
 
-export default Modal;
+export default ViewModal;

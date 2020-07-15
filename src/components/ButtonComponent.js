@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Button extends Component {
+class ButtonComponent extends Component {
     render() {
         if (this.props.modal) {
             return <button className="btn btn-lg btn-dark" type="button" value={this.props.value} onClick={this.props.handleClick} data-toggle="modal" data-target={this.props.token}>{this.props.buttonText} </button>;
@@ -9,4 +9,4 @@ class Button extends Component {
         }
     }
 }
-export default Button;
+export default ButtonComponent;

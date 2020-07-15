@@ -5,7 +5,7 @@ import TableComponent from './TableComponent';
 import APICall from './APICall';
 import DropdownComponent from './DropdownComponent';
 import PortfolioManager from './PorfolioManager';
-import Button from './Button';
+import ButtonComponent from './ButtonComponent';
 
 class PortfolioDisplay extends Component {
 
@@ -17,19 +17,20 @@ class PortfolioDisplay extends Component {
             shareNumber: 0
         };
         this.handleDropDownChange = this.handleDropDownChange.bind(this);
-        this.PortfolioManager = new PortfolioManager();
+        this.PortfolioManager = new PortfolioManager(this.refreshPortfolios);
     }
 
-    async getPortfolios() {
+    async refreshPortfolios() {
         let x = await this.PortfolioManager.getPortfolioList();
         this.setState({
-            portfolios: x
+            portfolios: x,
+            portfolioData: []
         });
         this.getDataFromJson();
     }
 
     componentDidMount() {
-        this.getPortfolios();
+        this.refreshPortfolios();
     }
 
     handleDropDownChange() {
@@ -46,32 +47,28 @@ class PortfolioDisplay extends Component {
                 <h1 className="my-4" >My Portfolio</h1>
                 <hr className="my-4" />
                 <DropdownComponent handleChange={this.handleDropDownChange} id="portfolio-selector" menuData={this.state.portfolios} />
-                <Button buttonText="Delete" handleClick={()=>{
+                <ButtonComponent buttonText="Delete" handleClick={()=>{
                     let pf = document.getElementById('portfolio-selector').value;
                     if(window.confirm('Are you sure you wish to delete ' + pf + ', this cannot be undone!')){
                         this.PortfolioManager.removePortfolio(pf);
                     }
                 }}/>
                 <TableComponent tableData={this.state.portfolioData} />
-                <Button buttonText="test" handleClick={() => {
-                    let dummydata = {
-                        "name": "Facebook",
-                        "token": "FB",
-                        "quantity": -5,
-                        "bought": 245.07
-                    };
-                    this.PortfolioManager.editPortfolio('portfolio2', dummydata);
+                {/* <ButtonComponent buttonText="test" handleClick={() => {
+                   
+                        let name="Facebook";
+                        let token= "FB";
+                        let quantity = 5;
+                        let price = 250.34;
+                    
+                    //this.PortfolioManager.editPortfolio('portfolio2',name, token, quantity, price);
                     //this.PortfolioManager.getPortfolioData('portfolio1');
                     //this.PortfolioManager.getQuantity('portfolio2', 'FB');
                     //this.PortfolioManager.addPortfolio('portfolio1');
-                    //this.PortfolioManager.addPortfolio('pls work v2');
-
-                }} />
-                {/* <div id="loading" className="text-center">
-                    <div class="spinner-border text-secondary " role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div> */}
+                    this.PortfolioManager.addPortfolio('pls work v3');
+                    this.refreshPortfolios();
+                }} /> */}
+                
                 <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
                 <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
             </div>
@@ -80,13 +77,9 @@ class PortfolioDisplay extends Component {
 
 
     async getDataFromJson() {
-        // Get basic data from the JSON file about the details of portfolio
+        // Get basic data from the JSON database about the details of portfolio
         let currentPortfolio = document.getElementById('portfolio-selector').value;
         const resp = await this.PortfolioManager.getPortfolioData(currentPortfolio);
-
-        console.log(resp);
-        //console.log(resp.data);
-        //console.log(resp.data.portfolios);
         var rows = Object.values(resp);
         console.log(rows);
         this.getDataFromAPI(rows);
