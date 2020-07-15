@@ -12,9 +12,7 @@ async function APICall(APIfunction, APIsearch) {
     const APIlink = `https://www.alphavantage.co/query?function=${APIfunction}&${param}=${APIsearch}&interval=1min&apikey=BC34PVP226M1KDMR&outputsize=compact`;
 
     if (classData.usedCalls.includes(APIlink)) {
-        let x = findValue(classData.callMap, APIlink);
-        console.log(x);
-        return x;
+        return findValue(classData.callMap, APIlink);
     } else {
         let resp = await axios.get(APIlink);
         classData = {
@@ -40,12 +38,8 @@ function findValue(arr, key) {
 }
 
 function removeOldData(APIlink) {
-    console.log('removing old data');
-
     // Remove the APIlink from usedCalls
     for (let i = 0; i < classData.usedCalls.length; i++) {
-        console.log('looking at ' + classData.usedCalls[i]);
-        console.log('looking at ' + APIlink);
         if (classData.usedCalls[i] === APIlink) {
             classData.usedCalls.splice(i, 1);
         }
