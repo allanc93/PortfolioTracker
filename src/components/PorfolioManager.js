@@ -79,6 +79,9 @@ class PortfolioManager {
 
     // Creates a new blank portfolio
     async addPortfolio(title) {
+        if(!title){
+            return;
+        }
         let listOfFiles = await this.getPortfolioList();
         if (listOfFiles.includes(title)) {
             alert("Can't add " + title + ' since it already exists!');

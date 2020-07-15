@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import PortfolioManager from './PorfolioManager';
+import DropdownComponent from './DropdownComponent';
 
 class ViewModal extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDropDownChange = this.handleDropDownChange.bind(this);
+        this.PortfolioManager = new PortfolioManager(this.refreshPortfolios);
         // inputField state stores the data which is typed into the number input
         this.state = {
-            inputField: 0
+            inputField: 0,
+            currentPortfolio: '',
+            portfolios: []
         };
+    }
+
+    componentDidMount() {
+        this.refreshPortfolios();
+    }
+
+    async refreshPortfolios() {
+        let x = await this.PortfolioManager.getPortfolioList();
+        this.setState({
+            portfolios: x,
+            currentPortfolio: x[0]
+        });
     }
 
     // When event occurs, update the inputField state to reflect what has been typed
@@ -27,7 +45,18 @@ class ViewModal extends Component {
         this.setState({
             inputField: 0
         });
-        alert(`You have purchased ${this.state.inputField} shares in ${this.props.title}`);
+        if (this.state.inputField > 0) {
+            this.PortfolioManager.editPortfolio(this.state.currentPortfolio, this.props.title, this.props.id, this.state.inputField, this.props.modalData.price);
+            alert(`You have purchased ${this.state.inputField} shares in ${this.props.title}`);
+        }else{
+            alert("Can't buy less than 1 share!");
+        }
+    }
+
+    handleDropDownChange() {
+        this.setState({
+            currentPortfolio: document.getElementById('portfolio-selector').value
+        });
     }
 
     render() {
@@ -87,6 +116,7 @@ class ViewModal extends Component {
                             {/* When a change occurs handleChange event handler is called */}
                             <input type="number" min="0" className="form-control w-75" id="amount-input" value={this.state.inputField} onChange={this.handleChange} />
                         </div>
+                        <DropdownComponent handleChange={this.handleDropDownChange} id="portfolio-selector" menuData={this.state.portfolios} />
                         <button type="submit" className="btn btn-success w-50">
                             Buy
                         </button>

@@ -14,7 +14,7 @@ class DropdownComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div className="m-1">
                 <select onChange={this.props.handleChange} id={this.props.id} name="DropdownList">
                     {this.getDropDownData()}
                 </select>
